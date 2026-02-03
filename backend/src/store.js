@@ -137,6 +137,10 @@ function resetAuctions() {
         // Reset time relative to NOW
         item.endTime = Date.now() + (durations[item.id] || 5) * 60 * 1000;
     });
+
+    // Reset user counter so next user becomes "User 1" again
+    userCount = 0;
+
     return items;
 }
 

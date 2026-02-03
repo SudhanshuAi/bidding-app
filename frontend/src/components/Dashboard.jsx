@@ -5,7 +5,7 @@ const Dashboard = ({ items, socket, serverTimeOffset, currentUser }) => {
     return (
         <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: 'var(--spacing-lg)'
         }}>
             {items.map(item => (

@@ -178,3 +178,59 @@ h4 {
 .flash-error {
   animation: flash-red 0.8s ease-out;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+  /* Mobile: Stack header vertically */
+  header .container {
+    flex-direction: column !important;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .connection-status {
+    font-size: 0.875rem;
+  }
+
+  /* Hide reset button on mobile or make it smaller */
+  header button {
+    font-size: 0.75rem !important;
+    padding: 0.4rem 0.8rem !important;
+    margin-left: 0 !important;
+    margin-top: 0.5rem;
+  }
+
+  /* Reduce spacing */
+  .container {
+    padding: 0 var(--spacing-xs);
+  }
+
+  /* Smaller badges */
+  .badge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.75rem;
+  }
+
+  /* Adjust card image height */
+  .glass-panel>div:first-child {
+    height: 180px !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Extra small mobile */
+  header h1 {
+    font-size: 1.25rem;
+  }
+
+  .btn {
+    font-size: 0.875rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
