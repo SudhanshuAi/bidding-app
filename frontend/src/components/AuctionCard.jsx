@@ -73,18 +73,24 @@ const AuctionCard = ({ item, socket, serverTimeOffset, currentUser }) => {
                     />
                 </div>
 
-                {(isWinning || isOutbid || (hasEnded && item.highestBidder)) && (
+                {(isWinning || isOutbid || hasEnded) && (
                     <div style={{
                         position: 'absolute',
                         top: '12px',
                         left: '12px',
                         zIndex: 10,
-                    }} className={`badge ${isWinning ? 'badge-success' : 'badge-danger'}`}>
-                        {isWinning
-                            ? (hasEnded ? 'Won' : 'Winning')
-                            : (hasEnded
-                                ? `Won by ${item.highestBidderName || 'Someone'}`
-                                : `Outbid by ${item.highestBidderName || 'Someone'}`
+                    }} className={`badge ${hasEnded && !item.highestBidder
+                            ? 'badge-neutral'
+                            : (isWinning ? 'badge-success' : 'badge-danger')
+                        }`}>
+                        {hasEnded && !item.highestBidder
+                            ? 'Unsold'
+                            : (isWinning
+                                ? (hasEnded ? 'Won' : 'Winning')
+                                : (hasEnded
+                                    ? `Won by ${item.highestBidderName || 'Someone'}`
+                                    : `Outbid by ${item.highestBidderName || 'Someone'}`
+                                )
                             )
                         }
                     </div>
