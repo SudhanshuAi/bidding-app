@@ -1,4 +1,4 @@
-const { placeBid, getItems, registerUser } = require('./store');
+const { placeBid, getItems, registerUser, resetAuctions } = require('./store');
 
 function setupSockets(io) {
     io.on('connection', (socket) => {
@@ -39,6 +39,11 @@ function setupSockets(io) {
                     message: result.message
                 });
             }
+        });
+
+        socket.on('RESET_AUCTIONS', () => {
+            const items = resetAuctions();
+            io.emit('AUCTIONS_RESET', items);
         });
 
         socket.on('disconnect', () => {

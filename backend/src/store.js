@@ -122,6 +122,24 @@ function placeBid(itemId, amount, bidderId) {
     return { success: true, item };
 }
 
+function resetAuctions() {
+    const durations = {
+        1: 5, // 5 mins
+        2: 3, // 3 mins
+        3: 10, // 10 mins
+        4: 7 // 7 mins
+    };
+
+    items.forEach(item => {
+        item.currentBid = item.startPrice;
+        item.highestBidder = null;
+        item.highestBidderName = null;
+        // Reset time relative to NOW
+        item.endTime = Date.now() + (durations[item.id] || 5) * 60 * 1000;
+    });
+    return items;
+}
+
 module.exports = {
     getItems,
     getItemById,
@@ -129,5 +147,6 @@ module.exports = {
     getItemById,
     placeBid,
     registerUser,
-    getUser
+    getUser,
+    resetAuctions
 };

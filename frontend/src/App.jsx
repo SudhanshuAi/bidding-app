@@ -58,6 +58,10 @@ function App() {
             ));
         });
 
+        socket.on('AUCTIONS_RESET', (items) => {
+            setItems(items);
+        });
+
         socket.on('disconnect', () => {
             setConnected(false);
         });
@@ -88,6 +92,21 @@ function App() {
                         {connected ? 'Live Connected' : 'Disconnected'}
                         {currentUser && <div style={{ fontSize: '0.9rem', color: 'hsl(var(--color-text-dim))', marginTop: '4px' }}>Welcome, {currentUser.name}</div>}
                     </div>
+                    {/* Admin/Reset Controls */}
+                    <button
+                        onClick={() => socket.emit('RESET_AUCTIONS')}
+                        className="btn"
+                        style={{
+                            marginLeft: '2rem',
+                            padding: '0.5rem 1rem',
+                            fontSize: '0.85rem',
+                            background: 'rgba(255,255,255,0.1)',
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            color: 'var(--color-text-dim)'
+                        }}
+                    >
+                        Reset Auctions
+                    </button>
                 </div>
             </header>
 
