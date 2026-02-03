@@ -18,7 +18,7 @@ app.use('/', routes);
 // Socket.io Setup
 const io = new Server(server, {
     cors: {
-        origin: "*", // Allow all origins for simplicity in dev/docker
+        origin: process.env.CLIENT_URL || "*", // Allow all origins in dev, strict in prod
         methods: ["GET", "POST"]
     }
 });

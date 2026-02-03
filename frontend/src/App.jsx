@@ -13,7 +13,9 @@ const getSessionId = () => {
     return sessionId;
 };
 
-const socket = io('http://localhost:3001', {
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
+const socket = io(API_URL, {
     auth: {
         token: getSessionId()
     }
@@ -27,7 +29,7 @@ function App() {
 
     useEffect(() => {
         // Initial Fetch
-        fetch('http://localhost:3001/items')
+        fetch(`${API_URL}/items`)
             .then(res => res.json())
             .then(data => {
                 setItems(data.items);

@@ -1,0 +1,25 @@
+services:
+  # 1. Frontend Static Site (FREE)
+  - type: web
+    name: bidding-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    rootDir: frontend
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: bidding-backend
+          property: host
+  
+  # 2. Backend Web Service (FREE TIER)
+  - type: web
+    name: bidding-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000
