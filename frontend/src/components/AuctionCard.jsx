@@ -14,6 +14,12 @@ const AuctionCard = ({ item, socket, serverTimeOffset, currentUser }) => {
         setIsWinning(item.highestBidder === myId);
     }, [item.highestBidder, myId]);
 
+    // Reset local ended state when server endTime updates (e.g. on Reset)
+    useEffect(() => {
+        const isEnded = Date.now() + serverTimeOffset >= item.endTime;
+        setHasEnded(isEnded);
+    }, [item.endTime, serverTimeOffset]);
+
     // Handle flash animations on bid update
     useEffect(() => {
         // Determine flash type
@@ -80,8 +86,8 @@ const AuctionCard = ({ item, socket, serverTimeOffset, currentUser }) => {
                         left: '12px',
                         zIndex: 10,
                     }} className={`badge ${hasEnded && !item.highestBidder
-                            ? 'badge-neutral'
-                            : (isWinning ? 'badge-success' : 'badge-danger')
+                        ? 'badge-neutral'
+                        : (isWinning ? 'badge-success' : 'badge-danger')
                         }`}>
                         {hasEnded && !item.highestBidder
                             ? 'Unsold'
